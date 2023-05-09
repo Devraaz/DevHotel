@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Profile {% endblock title %}
+{% block head %}{% endblock head %}
+
+{% block body %}
+<div class="container">
+    {% if request.session.cust %}
+        <h2 class='text-center'>Welcome {{request.session.cust}}</h2>
+        <h2 class='text-center'>Welcome {{request.session.cust_id}}</h2>
+        <h4 class="text-center">Atithi Devo Bhava</h4>
+
+
+        <hr>
+        <b>Before Proceding Further Fill Up this</b>
+        <form method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="col-md-6 mb-4 pb-2">
+            <div class="form-outline">
+            <input type="file" id="cust_idproof" class="form-control form-control-lg" name='id_proof'  required camera='capture' multiple/>
+            <label class="form-label" for="cust_lname">ID Proof(ID Card/ Aadhar/DL/Passport)</label>
+            </div>
+            <button type = "submit" class="btn btn-primary">Submit</button>
+          </div>
+
+    {% else %}
+        <a href="{% url 'login' %}">Login</a> to continue
+    {% endif %}
+</div>
+{% endblock body %}
+

@@ -1,0 +1,79 @@
+{% extends 'management/based.html' %}
+
+{% block title %}Booking History{% endblock title %}
+{% block head %}
+
+{% endblock head %}
+
+{% block body %}
+
+<h1 class='text-center'>Hello {{request.session.staff_name}}</h1>
+<div class='container'>
+
+    <h1 class='text-center'> Bookings History </h1>
+    <h2>FILTER</h2>
+    <HR>
+      <div class='container table-responsive'>
+      <table class="table">
+          <thead class="thead-dark">
+          <tr>
+              <th scope="col">Book ID</th>
+              <th scope="col">Customer Name</th>
+              <th scope="col">Custoemr Phone</th>
+              <th scope="col">Customer Email</th>
+              <th scope='col'>Id Proof</th>
+              <th scope='col'>Room No.</th>
+              <th scope="col">Room Type</th>
+              <th scope="col">Checkin Date</th>
+              <th scope="col">Checkout Date</th>
+              <th scope="col">Checked Out</th>
+              <th scope="col">Amount Paid</th>
+              <th scope="col">Payment Status</th>
+              <th scope="col">Payment Order Id</th>
+              <th scope="col">Date</th>
+
+  
+              
+          </tr>
+          </thead>
+          <tbody>
+              
+              {% for b in book%}
+              <tr>
+                  
+                  <td>{{b.book_id}}</td>
+                  <td>{{b.cust_name}}</td>
+                  <td>{{b.cust_phone}}</td>
+                  <td>{{b.cust_email}}</td>
+                  <td>{{b.cust_idproof}}</td>
+                  <td>{{b.room_no}}</td>
+                  <td>{{b.room_type}}</td>
+                  <td>{{b.checkin}}</td>
+                  <td>{{b.checkout}}</td>
+                  <td>{{b.checked_out}}</td>
+                  <td>{{b.price}}</td>
+                  <td>{{b.payment_status}}</td>
+                  <td>{{b.order_id}}</td>
+                  <td>{{b.date}}</td>
+                  
+                 
+                  
+              </tr>
+              {% endfor %}
+          
+          </tbody>
+      </table>
+  </div>
+  
+      
+    </div >
+  </div>
+  
+
+
+
+<script>
+  var act = document.getElementById('booking_history');
+  act.classList.add('active');
+</script>
+{% endblock body %}

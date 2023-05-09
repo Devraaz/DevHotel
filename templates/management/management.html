@@ -1,0 +1,74 @@
+{% extends 'management/basem.html' %}
+
+{% block title %} Management {% endblock title %}
+{% block head %}
+<style>
+
+  .alert{
+    width: 300px;
+    position: absolute;
+    z-index: 10;
+    right: 0px;
+    background: linear-gradient(to right, #60f542, #33b01a);
+    margin: auto;
+    transition: transform 0.5s ease;
+    trasfrom: translateX(-100%);
+    
+}
+.alert b{
+    margin: auto;
+}
+.fade {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .fade.out {
+    opacity: 0;
+  }
+</style>
+
+{% endblock head %}
+
+{% block body %}
+
+
+{% for message in messages %}
+        <div id="my-alert" class="alert alert-dismissible fade show" role="alert">
+            <b style='text-align: center; margin: auto;'>{{ message }}</b>
+        </div>
+{% endfor %}
+
+
+<div class="container text-white-50 bg-dark" style="border-radius: 6px; margin: auto; padding: 30px; top: 50px; postition: absolute;">
+    <h1 class='text-center'>Log In Here</h1>
+    <form method="POST"  style=' padding: 40px;'>
+      {% csrf_token %}
+        <!-- Email input -->
+        <div class="col-sm-4 mx-auto form-outline mb-4">
+          <input type="email" id="form2Example1" name="email" class="form-control" required/>
+          <label class="form-label" for="form2Example1">Email address</label>
+        </div>
+      
+        <!-- Password input -->
+        <div class="col-sm-4 mx-auto form-outline mb-4">
+          <input type="password" id="form2Example2" name="password" class="form-control" required/>
+          <label class="form-label" for="form2Example2">Password</label>
+        </div>
+
+        <div class="col-sm-4 mx-auto form-outline mb-4">
+          
+          <button type="submit" class="btn btn-primary mb-4" style='border: 2px solid black; margin: auto;'>Log in</button>
+        </div>
+        <!-- 2 column grid layout for inline styling -->
+        
+      
+        <!-- Submit button -->
+      
+        <!-- Register buttons -->
+        
+      </form>
+</div>
+
+{% endblock body %}
+

@@ -1,0 +1,62 @@
+{% extends 'management/based.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+{% block head %}
+
+{% endblock head %}
+
+{% block body %}
+
+<h1 style='text-align: center;padding: 10px;'>ROOM DETAILS</h1>
+<div class="filter">
+<h4>Filters</h4>
+Room No &nbsp; Room Type &nbsp; is Booked
+</div>
+<div class='container table-responsive'>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Room Number</th>
+            <th scope="col">Room Tyype</th>
+            <th scope="col">Is Booked</th>
+            <th scope='col'>CheckIn</th>
+            <th scope='col'>CheckOut</th>
+            <th scope="col">Price</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+            
+            {% for l in data%}
+            <tr>
+                
+                <th scope="row">-></th>
+                <td>{{l.room_no}}</td>
+                <td>{{l.room_type}}</td>
+                <td>{{l.is_booked}}</td>
+                <td>{{l.checkInDate}}</td>
+                <td>{{l.checkOutDate}}</td>
+                <td>{{l.price}}</td>
+                <td>{{l.book_id}}</td>
+                <form method='POST' action='book_history'>
+                    {% csrf_token %}
+                    <input hidden type='number' name='book_id' value='{{l.book_id}}'/>
+                
+                <td><button type='submit' class="btn btn-danger">Check Out</button></td>
+                </form>
+                
+            </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<script>
+  var act = document.getElementById('see_rooms');
+  act.classList.add('active');
+</script>
+{% endblock body %}

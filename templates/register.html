@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock title %}
+{% block head %}{% endblock head %}
+
+{% block body %}
+
+<div class='container'>
+    <form method='POST' action='' enctype = 'multipart/form-data'>
+        {% csrf_token %}
+        <h3 class="fw-small mb-5 text-center" style="color: #4835d4;">Yatri Register</h3>
+        
+        <div class="col-sm-6 mx-auto mb-4 pb-1">
+            <div class="form-outline">
+            <input required type="text" id="cust_fname" class="form-control form-control-lg" name='name'/>
+            <label class="form-label" for="cust_fname">Full Name</label>
+            </div>
+        </div>
+
+        <div class="col-sm-6 mx-auto mb-4 pb-2">
+            <div class="form-outline">
+            <input type="email" id="cust_email" class="form-control form-control-lg" name='email'/>
+            <label class="form-label" for="cust_lname">Email</label>
+            </div>
+        </div>
+
+        <div class="col-sm-6 mx-auto mb-4 pb-2">
+            <div class="form-outline">
+            <input  required type="number" id="cust_name" class="form-control form-control-lg" name='phone_no'/>
+            <label class="form-label" for="cust_lname">Phone Number</label>
+            </div>
+        </div>
+
+        <div class="col-sm-6 mx-auto mb-4 pb-2">
+            <div class="form-outline">
+            <input  required type="password" id="pswd1" class="form-control form-control-lg" name='pswd1'/>
+            <label class="form-label" for="pswd1">Password</label>
+            </div>
+        </div>
+
+        <div class="col-sm-6 mx-auto mb-4 pb-2">
+            <div class="form-outline">
+            <input  required type="password" id="pswd2" class="form-control form-control-lg" name='pswd2'/>
+            <label class="form-label" for="pswd2">Confirm Password2</label>
+            </div>
+        </div>
+        <div class="col-sm-6 mx-auto mb-4 pb-2">
+            <button type="submit" class="btn btn-outline-success col-4">Register</button>
+        </div>
+        
+        
+    </form>
+</div>
+
+{% endblock body %}

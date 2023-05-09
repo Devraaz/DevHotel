@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock title %}
+{% block head %}{% endblock head %}
+
+{% block body %}
+<h1 class="text-center">Yatri LogIn</h1><br>
+<div class="container p-2">
+<form method="POST"action="">
+    {% csrf_token %}
+        <div class="col-sm-4 mx-auto mb-4 pb-2">
+            <div class="form-outline">
+            <input type="email" id="cust_email" class="form-control form-control-lg" name='email' required/>
+            <label class="form-label" for="cust_lname">Email</label>
+            </div>
+        </div>
+        <div class="col-sm-4 mx-auto mb-4 pb-2">
+            <div class="form-outline">
+            <input  required type="password" id="pswd1" class="form-control form-control-lg" name='pswd1' required/>
+            <label class="form-label" for="pswd1">Password</label>
+            </div>
+        </div>
+        <div class="col-sm-4 mx-auto mb-4 pb-2">
+            <button type='submit' class='btn btn-outline-primary col-3'>Log In</button>
+        </div>
+    
+    
+</form>
+</div>
+
+        {% endblock body %}
+

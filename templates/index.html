@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Home {% endblock title %}
+{% block head %}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+    .checking_field{
+        margin: 50px auto;
+        width: 400px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px #ccc;
+        top: -200px;
+
+    }
+    .checking_field label{
+        font-size: 20px;
+
+    }
+    .checking_field input{
+        border-radius: 5px;
+        display: block;
+        margin: 10px 0;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    @media screen and (min-width: 800px) {
+      #about{
+        font-size: 20px;
+      }
+    }
+</style>
+{% endblock head %}
+
+{% block body %}
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="4000">
+        <img src="static/photos/bg2.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>The Finest Hotel</h5>
+          <p>Some representative placeholder content for the first slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="4000">
+        <img src="static/photos/bg4.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Dev and Luxrious</h5>
+          <p>Some representative placeholder content for the second slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="4000">
+        <img src="static/photos/bg3.png" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>The Classy</h5>
+          <p>Some representative placeholder content for the third slide.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <br>
+  <div class="container h-50" >
+    <h1 id="room_book" class='text-center'>Book Your Rooms</h1>
+    <div class="container text-center d-flex justify-content-center">
+        <form method='GET' action='check_rooms' class="mx-auto checking_field">
+            {% csrf_token %}
+            <label class=" form-label " for="checkIn">Check-in date:</label>
+            <input class='from-control' type="date" id="checkin" name="checkin" required>
+            <label class=" form-label" for="checkOut">Check-out date:</label>
+            <input class='from-control' type="date" id="checkout" name="checkout" required><br>
+            <button  type="submit" class='btn btn-outline-success'>Check Availability</button>
+        </form>
+    </div>
+</div>
+
+<div class='container section-2 '>
+  <span class='d-flex justify-content-center' data-aos="flip-up" data-aos-anchor-placement="top-center"><img  class='img-fluid' style ='margin: auto;' src='{% static 'photos/logo1.png' %}'></span>
+    <h1 class="text-center">ABOUT</h1>
+
+    <p id='about'>
+        &nbsp; The Dev Palace Hotel is a luxurious and opulent establishment 
+        that boasts a blend of classic and contemporary architecture. It offers
+         a range of spacious and elegantly furnished accommodations, from rooms 
+         to opulent suites. The hotel's dining options are impressive, with a
+          variety of restaurants serving exquisite cuisine from around the world,
+           and a bar offering an extensive selection of premium spirits, wines, 
+           and cocktails. The hotel has an impressive spa and wellness center,
+            a state-of-the-art fitness center, a swimming pool, and a sauna. The hotel 
+            is known for its exceptional service, with a team of dedicated staff that 
+            goes above and beyond to ensure that every guest's needs are met.
+    </p>
+</div>
+
+<div class='container-fluid'>
+    <h1 class='text-center' style='color: #FFD700'>Amenities</h1>
+
+    <div class="container ">
+        <div class="row text-center mx-auto" >
+            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "data-aos="fade-up" data-aos-duration="2000">
+                <img src="static/photos/wifi.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">Free Wifi</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                
+                </div>
+            </div>
+        
+
+            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "   data-aos="fade-up" data-aos-duration="1000">
+                <img src="static/photos/pool.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">Swimming Pool</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                
+                </div>
+            </div>
+
+            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "   data-aos="fade-up" data-aos-duration="3000">
+                <img src="static/photos/gym.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">Gym</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center"  >
+            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "data-aos="fade-up" data-aos-duration="1000">
+                <img src="static/photos/parking.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">Parking Hall</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                
+                </div>
+            </div>
+        
+
+            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "data-aos="fade-up" data-aos-duration="3000">
+                <img src="static/photos/dining hall.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">Dining Hall</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                
+                </div>
+            </div>
+
+            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "data-aos="fade-up" data-aos-duration="2000">
+                <img src="static/photos/casino.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">Casino</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                
+                </div>
+            </div>
+        </div>
+        
+        
+           
+</div>
+
+
+
+<!---To be entered from backend-->
+<div class='container'>
+    <h1 class='text-center'> Gallery</h1>
+    <div class='row'>
+        <div class="card col-sm-3" style="border: 5px solid black;margin: 4%; ">
+            <img src="static/photos/dining hall.jpg" class="card-img-top" alt="...">
+            
+        </div>
+    </div>
+
+
+</div>
+
+<div class="container-fluid">
+    <h1 class="text-center">See Us on Map</h1>
+    <div id='map' style='width: 90%; height: 400px; margin: auto; font-size: 1.4rem;'></div>
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+        <script>
+                
+            
+                var lat="18.9217";
+                var lng = "72.8332";
+                var hstl_name = "Dev Palace Hotel"
+                
+                var map = L.map('map').setView([lat, lng], 16);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+        
+                var marker = L.marker([lat, lng]).addTo(map)
+                    .bindPopup(hstl_name)
+                    .openPopup();
+            
+        </script>
+</div>
+
+
+
+
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+<script>
+
+    var today = new Date().toISOString().split('T')[0];
+    // Set the minimum date for the checkin field to today's date
+    document.getElementById('checkin').setAttribute('min', today);
+  
+    // Function to update the minimum date for the checkout field
+    function updateCheckoutMinDate() {
+      var checkinDate = document.getElementById('checkin').value;
+      // If checkin date is set, update the minimum date for checkout to the next day
+      if (checkinDate) {
+        var checkoutMinDate = new Date(checkinDate);
+        checkoutMinDate.setDate(checkoutMinDate.getDate() + 1);
+        var checkoutMinDateString = checkoutMinDate.toISOString().split('T')[0];
+        document.getElementById('checkout').setAttribute('min', checkoutMinDateString);
+      }
+    }
+  
+    // Update the minimum date for checkout when the checkin date changes
+    document.getElementById('checkin').addEventListener('change', updateCheckoutMinDate);
+  
+    // Disable past dates for both fields
+    var dateFields = document.getElementsByTagName('input');
+    for (var i = 0; i < dateFields.length; i++) {
+      dateFields[i].setAttribute('min', today);
+    }
+</script>
+{% endblock body %}

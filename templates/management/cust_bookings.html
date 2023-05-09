@@ -1,0 +1,101 @@
+{% extends 'management/based.html' %}
+
+{% block title %} Customer Bookings{% endblock title %}
+{% block head %}
+
+{% endblock head %}
+
+{% block body %}
+<div class='container'>
+
+  <h1 class='text-center'> Customer Bookings </h1>
+  <h2>FILTER</h2>
+  <HR>
+    <div class='container table-responsive'>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Room No.</th>
+            <th scope='col'>CheckIn</th>
+            <th scope='col'>CheckOut</th>
+            <th scope="col">Price</th>
+            <th scope="col">Payment Paid</th>
+
+            
+        </tr>
+        </thead>
+        <tbody>
+            
+            {% for b in book%}
+            <tr>
+                
+                <th scope="row">-></th>
+                <td><a href="#" class='btn btn-primary' data-toggle="modal" data-target="#myModal{{ b.id }}">{{b.cust_name}}</a></td>
+                <td>{{b.cust_phone}}</td>
+                <td>{{b.room_no}}</td>
+                <td>{{b.checkin}}</td>
+                <td>{{b.checkout}}</td>
+                <td>{{b.price}}</td>
+                <td>{{b.payment_status}}</td>
+                <form method='POST' action='see_rooms'>
+                  {% csrf_token %}
+                  <td><input hidden type="number" name = 'room_no' value ='{{b.room_no}}'></td>
+                  <td><input hidden type="text" name = 'checkin' value ='{{b.checkin}}'></td>
+                  <td><input hidden type="text" name = 'checkout' value ='{{b.checkout}}'></td>
+                  <td><input hidden type="number" name = 'book_id' value ='{{b.id}}'></td>
+                  
+                  <td><button type='submit' onclick='disable()' class='btn btn-success' >Check In</button></td>
+                 
+
+                </form>
+               
+                
+            </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+
+    
+  </div >
+</div>
+
+
+<script>
+  var act = document.getElementById('cust_bookings');
+  act.classList.add('active');
+</script>
+<script>
+  function disable(){
+    document.getElementById('disable').disabled = true;
+  }
+</script>
+
+{% endblock body %}
+
+
+{% comment %} 
+{% for b in book %}
+    <div class="card m-3" style="width: 18rem;">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Name: {{b.cust_name}}</li>
+        <li class="list-group-item">Phone: {{b.cust_phone}}</li>
+        <li class="list-group-item">Email: {{b.cust_email}}</li>
+        <li class="list-group-item">ID: <a href="{{media/b.cust_idproof}}">{{b.cust_idproof}}</a></li>
+        <li class="list-group-item">Room No: {{b.room_no}}</li>
+        <li class="list-group-item">Room Type: {{b.room_type}}</li>
+        <li class="list-group-item">CheckIn Date: {{b.checkin}}</li>
+        <li class="list-group-item">CheckOut Date: {{b.checkout}}</li>
+        <li class="list-group-item">Is Booked: {{b.is_booked}}</li>
+        <li class="list-group-item">Price: {{b.price}}</li>
+        <li class="list-group-item">Payment Status: {{b.payment_status}}</li>
+        <li class="list-group-item">Order id: {{b.order_id}}</li>
+        <li class="list-group-item">Date: {{b.date}}</li>
+      </ul>
+    </div>
+    
+  {% endfor %} {% endcomment %}

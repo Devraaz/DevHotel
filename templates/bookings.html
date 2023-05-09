@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block title %}Bookings {% endblock title %}
+{% block head %}
+<style>
+  .blink_me {
+    text-align: center;
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    40% {
+      opacity: 0;
+    }
+  }
+</style>
+
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+    {% if request.session.cust %}
+    <div class="card " style="width: 30rem; margin: auto; margin-top: 5px; ">
+        <div class="card-body">
+          <h5 class="card-title fs-2">Confirm Booking</h5>
+          <h6 class="card-subtitle mb-2 text-muted fs-4">From {{checkin}} to {{checkout}}</h6>
+          <p class="card-text fs-4">
+            Room Number: {{room.room_no}}<br>
+            Room Type: {{room.room_type}}<br>
+          <form action='payment_status' method="POST">
+            {% csrf_token %}
+            Room Price: <b>{{new_price}}</b></p>
+            <input hidden type='number' name='price' value="{{new_price}}">
+          
+          <button  id="rzp-button1" type='submit' class="card-link btn btn-success">Proceed to Pay</button>
+          <p class='blink_me' style="font-weight: bold; text-transform: uppercase;">Please dont reload the page or move back while processing payments</p>
+          </form>
+        </div>
+      </div>
+                <hr>
+      <div class='container'>
+        <form method="POST"action="">
+          {% csrf_token %}
+          <div class="row mx-auto" style="width: 50vw; ">
+              <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                  <input type="text" id="cust_name" class="form-control form-control-lg" name='c_name' value="{{cust.name}}"readonly required/>
+                  <label class="form-label" for="cust_lname">Name</label>
+                  </div>
+              </div>
+              <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                  <input type="email" id="cust_email" class="form-control form-control-lg" name='email' value="{{cust.email}}" disabled required/>
+                  <label class="form-label" for="cust_lname">Email</label>
+                  </div>
+              </div>
+              <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                  <input type="number" id="cust_phone" class="form-control form-control-lg" name='phone' value="{{cust.phone_no}}" readonly required/>
+                  <label class="form-label" for="cust_lname">Phone</label>
+                  </div>
+              </div>
+              
+              <div class="col-md-6 mb-4 pb-2">
+                <div class="form-outline">
+                <input type="number" id="cust_phone" class="form-control form-control-lg" name='phone' value="{{room.room_no}}" readonly required/>
+                <label class="form-label" for="cust_lname">Room Number</label>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4 pb-2">
+                <div class="form-outline">
+                <input type="text" id="cust_phone" class="form-control form-control-lg" name='phone' value="{{room.room_type}}" readonly required/>
+                <label class="form-label" for="cust_lname">Room Type</label>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4 pb-2">
+                <div class="form-outline">
+                <input type="text" id="cust_phone" class="form-control form-control-lg" name='phone' value="{{new_price}}" readonly required/>
+                <label class="form-label" for="cust_lname">Price</label>
+                </div>
+              </div>
+              
+              
+            
+              
+            </div>
+          <div class="row mx-auto" style="width: 50vw; ">
+          <button hidden type = 'submit' class='btn btn-success col-3 '>Confirm</button>
+
+          </div>
+        </form>
+      </div>
+    
+    {% else %}
+        <h4 class="text-center">Please <a href='{% url 'login' %}'> Login</a> to continue CheckIn</h4>
+    {% endif %}
+</div>
+
+
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  
+<script>
+  var options = {
+      "key": "rzp_test_DBcd3uPhflsxUe", // Enter the Key ID generated from the Dashboard
+      "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "Dev Palace Hotel", //your business name
+      "description": "Room Booking",
+      "image": "https://example.com/your_logo",
+      "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1",
+      "callback_url": "{% url 'payment_status' %}",
+      "handler": function (response){
+        console.log(response)
+        window.location.href = `http://127.0.0.1:8000/payment_status?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}`
+
+      },
+      "theme": {
+          "color": "#3399cc"
+      }
+  };
+  var rzp1 = new Razorpay(options);
+  rzp1.on('payment.failed', function (response){
+    alert(response.error.code);
+    alert(response.error.description);
+    alert(response.error.source);
+    alert(response.error.step);
+    alert(response.error.reason);
+    alert(response.error.metadata.order_id);
+    alert(response.error.metadata.payment_id);
+  });
+  document.getElementById('rzp-button1').onclick = function(e){
+      rzp1.open();
+      e.preventDefault();
+  }
+  </script>
+
+{% endblock body %}
+

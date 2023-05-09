@@ -1,0 +1,19 @@
+{% extends 'management/based.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+{% block head %}
+
+{% endblock head %}
+
+{% block body %}
+
+<h1 class='text-center'>Hii {{request.session.staff_name}}</h1>
+
+
+
+
+<script>
+  var act = document.getElementById('dashboard');
+  act.classList.add('active');
+</script>
+{% endblock body %}

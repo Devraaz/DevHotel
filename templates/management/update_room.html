@@ -1,0 +1,67 @@
+{% extends 'management/based.html' %}
+
+{% block title %}Update Room{% endblock title %}
+{% block head %}
+
+{% endblock head %}
+
+{% block body %}
+
+<h2 class='text-center'>Update the Rooms</h2>
+
+
+<form class='p-4' method = "GET" action=''>
+
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-4 p-3">
+        <label for="room_no" class="form-label">Room No.</label>
+        <input type="number" class="form-control" id="number" name="room_no" aria-describedby="emailHelp" required>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="col-4 p-3">
+        <label for="room_type" class='from-label'>Room Type</label><br>
+        <input  type="radio" class="form-check-input mb-6" id="radio1" name="room_type" value="Single" >
+        <label class="form-check-label " for="radio1">Single</label>
+        <input type="radio" class="form-check-input mb-6" id="radio2" name="room_type" value="Delux"checked>
+        <label class="form-check-label" for="radio2">Delux</label>
+      </div>
+      <div class="col-3 p-3">
+        <label for="booked" class='from-label'>Is Booked</label><br>
+        <input  type="radio" class="form-check-input mb-6" id="radio1" onclick="showDates()" name="is_booked" value="Yes" >
+        <label class="form-check-label " for="radio1">Yes</label>
+        <input type="radio" class="form-check-input mb-6" id="radio2" onclick='showblank()' name="is_booked" value="No"checked>
+        <label class="form-check-label" for="radio2">NO</label>
+      </div>
+      <div id="dateFields" style="display:none">
+        <label for="checkInDate">CheckIn Date:</label>
+        <input type="date" id="checkInDate" name="checkInDate" >
+      
+        <label for="checkOutDate">CheckOut Date:</label>
+        <input type="date" id="checkOutDate" name="checkOutDate">
+      </div>
+    </div>
+    <div class='row'>
+      <div class="col-4 p-3">
+        <label for="room_type" class="form-label">Price</label>
+        <input type="number" class="form-control" id="price" name = "price" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+
+<script>
+  var act = document.getElementById('update_room');
+  act.classList.add('active');
+
+  function showDates() {
+    var dateFields = document.getElementById("dateFields");
+    dateFields.style.display = "block";
+  }
+  function showblank() {
+    var dateFields = document.getElementById("dateFields");
+    dateFields.style.display = "none";
+  }
+</script>
+{% endblock body %}

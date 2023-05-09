@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}Check Availability{% endblock title %}
+{% block head %}
+<style>
+    .checking_field{
+        margin: 50px auto;
+        width: 800px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px #ccc;
+        top: -200px;
+
+    }
+    .checking_field label{
+        font-size: 20px;
+
+    }
+    .checking_field input{
+        border-radius: 5px;
+        display: inline;
+        margin: 10px 0;
+        width: 30%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+</style>
+
+{% endblock head %}
+{% block body %}
+
+<div class='container'>
+    <div class="container text-center d-flex justify-content-center">
+        <form method='GET' action='check_rooms' class="mx-auto checking_field">
+            {% csrf_token %}
+                <label class=" form-label " for="checkIn">Check-in date:</label>
+                <input class='from-control' type="date" id="checkin" name="checkin"  required>
+                <label class=" form-label" for="checkOut">Check-out date:</label>
+                <input class='from-control' type="date" id="checkout" name="checkout" required>
+            <button  type="submit" class='btn btn-outline-success'>Check Availability</button>
+        </form>
+    </div>
+
+
+    <p class='fs-4 text-center'>Rooms Availability</p>
+    <p class="fs-5 text-center">From {{checkin}} to {{checkout}}</p>
+    {% if available_rooms%}
+        {% for r in available_rooms  %}
+        
+                <div class='row d-flex'>
+                    <div class="card my-2"  style="width: 18rem;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Room No: {{r.room_no}} </li>
+                            <li class="list-group-item">Room Type: {{r.room_type}}</li>
+                            <li class="list-group-item">Price: Rs<b> {{r.price}}</b></li>
+                            <form action="bookings" method='POST'>
+                                {% csrf_token %}
+                                <input hidden type='text' name='checkin' value='{{checkin}}'>
+                                <input hidden type='text' name='checkout' value='{{checkout}}'>
+                                <input hidden type='number'name='room_id' value='{{r.id}}'>
+
+                                <button type='submit' class="btn btn-success mb-2">Book</button>
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+        {% endfor %}
+    {% else %}
+        <h4 class="text-center">No Rooms Found</h4>
+    {% endif %}
+    
+</div>
+
+<script>
+    var today = new Date().toISOString().split('T')[0];
+    // Set the minimum date for the checkin field to today's date
+    document.getElementById('checkin').setAttribute('min', today);
+  
+    // Function to update the minimum date for the checkout field
+    function updateCheckoutMinDate() {
+      var checkinDate = document.getElementById('checkin').value;
+      // If checkin date is set, update the minimum date for checkout to the next day
+      if (checkinDate) {
+        var checkoutMinDate = new Date(checkinDate);
+        checkoutMinDate.setDate(checkoutMinDate.getDate() + 1);
+        var checkoutMinDateString = checkoutMinDate.toISOString().split('T')[0];
+        document.getElementById('checkout').setAttribute('min', checkoutMinDateString);
+      }
+    }
+  
+    // Update the minimum date for checkout when the checkin date changes
+    document.getElementById('checkin').addEventListener('change', updateCheckoutMinDate);
+  
+    // Disable past dates for both fields
+    var dateFields = document.getElementsByTagName('input');
+    for (var i = 0; i < dateFields.length; i++) {
+      dateFields[i].setAttribute('min', today);
+    }
+</script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const checkin = urlParams.get('checkin');
+    const checkout = urlParams.get('checkout');
+
+    // Set the values of the date fields if they exist in the query string
+    if (checkin) {
+    document.getElementById('checkin').value = checkin;
+    }
+    if (checkout) {
+    document.getElementById('checkout').value = checkout;
+    }
+
+</script>
+{% endblock body %}
+

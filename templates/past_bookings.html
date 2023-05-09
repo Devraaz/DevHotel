@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Profile {% endblock title %}
+{% block head %}{% endblock head %}
+
+{% block body %}
+<div class="container">
+    {% if request.session.cust %}
+    <h1 class="text-center">Past Booking History</h1>
+    <div class='container table-responsive'>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Room No</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">CheckIn Date</th>
+                <th scope="col">Checkout Date</th>
+                <th scope="col">Price</th>
+                <th scope="col">Checked Out</th>
+                <th scope='col'>Order ID</th>
+                <th scope='col'>Date</th>
+    
+                
+            </tr>
+            </thead>
+            <tbody>
+                
+                {% for b in book%}
+                <tr>
+                    
+                    <th scope="row">-></th>
+                    <td>{{b.room_no}}</a></td>
+                    <td>{{b.room_type}}</a></td>
+                    <td>{{b.checkin}}</td>
+                    <td>{{b.checkout}}</td>
+                    <td>{{b.price}}</td>
+                    <td>{{b.checked_out}}</td>
+                    <td>{{b.order_id}}</td>
+                    <td>{{b.date}}</td>
+                    
+                   
+                    
+                </tr>
+                {% endfor %}
+            
+            </tbody>
+        </table>
+    </div>
+
+    {% else %}
+        <a href="{% url 'login' %}">Login</a> to continue
+    {% endif %}
+</div>
+{% endblock body %}
+
+p

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block body %}
+{% if request.session.cust_id %}
+    <div class="container">
+        <p class="text-center"> <b>Payment successful</b></p><br>
+        <p class="text-center"> <b>{{error_message}}</b></p><br>
+
+        <b>Payment ID:{{payment_id}}</b><br>
+        <b>Order ID:{{order_id}}</b><br>
+        <form method='POST' action='confirmed'>
+            {% csrf_token %}
+            <button type = 'submit' class="btn btn-success">Confirm</button>
+        </form>
+    </div>
+
+{% else %}<a href="{% url 'login' %}">Login</a> to continue
+{% endif %}
+{% endblock body %}

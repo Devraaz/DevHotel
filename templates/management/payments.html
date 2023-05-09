@@ -1,0 +1,52 @@
+{% extends 'management/based.html' %}
+
+{% block title %}Payments{% endblock title %}
+{% block head %}
+
+{% endblock head %}
+
+{% block body %}
+
+<h1 class='text-center'>Paisa he Paisa {{request.session.staff_name}}</h1>
+
+<div class='container table-responsive'>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Razorpay Order Id</th>
+            <th scope="col">Razorpay Payment Id</th>
+            <th scope="col">Razorpay Signature</th>
+            <th scope='col'>Amount</th>
+            <th scope='col'>Payment Status</th>
+            <th scope="col">Customer Email</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+            
+            {% for l in pay%}
+            <tr>
+                
+                <td>{{l.razorpay_order_id}}</td>
+                <td>{{l.razorpay_payment_id}}</td>
+                <td>{{l.razorpay_signature}}</td>
+                <td>{{l.amount}}</td>
+                <td>{{l.payment_status}}</td>
+                <td>{{l.customer_email}}</td>
+                
+                
+            </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<script>
+  var act = document.getElementById('payment');
+  act.classList.add('active');
+</script>
+{% endblock body %}
