@@ -5,13 +5,16 @@
 <style>
     .checking_field{
         margin: 50px auto;
-        width: 800px;
+        width: 80%;
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 5px;
-        box-shadow: 0px 0px 10px #ccc;
+        box-shadow: 0px 0px 20px #ccc;
         top: -200px;
 
+    }
+    #check_btn{
+        margin: 10px;
     }
     .checking_field label{
         font-size: 20px;
@@ -27,50 +30,109 @@
         border-radius: 5px;
         font-size: 16px;
     }
+    #rooms_show{
+        
+        background: url('static/photos/logo1.png');
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: white;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+        border-radius: 10px;
+        border: 2px solid black;
+    }
+    #single_room{
+        margin: 20px 30px;
+        
+
+    }
+    #book_btn{
+        text-transform: uppercase;
+        width: 40%;
+        padding: 5px 20px;
+        margin: 10px;
+        float: right;
+
+
+    }
+    @media screen and (max-width: 800px) {
+        .checking_field{
+            flex-direction: column;
+
+        }
+        .checking_field label{
+
+        }
+        .checking_field input{
+            width: 100%;
+            
+        }
+        #rooms_show{
+            flex-direction: column;
+        }
+        #single_room{
+            width: 80%;
+            margin: auto;
+            margin-top: 30px;
+        }
+        
+    }
 </style>
 
 {% endblock head %}
 {% block body %}
 
-<div class='container'>
+<div class='container-fluid' style= 'background-color: #ebedf0'>
     <div class="container text-center d-flex justify-content-center">
-        <form method='GET' action='check_rooms' class="mx-auto checking_field">
+        <form method='GET' action='check_rooms' class="mx-auto d-flex justify-content-between checking_field" style='background-color: white;'>
             {% csrf_token %}
-                <label class=" form-label " for="checkIn">Check-in date:</label>
+                <label class=" form-label " for="checkIn">Check-in Date:</label>
                 <input class='from-control' type="date" id="checkin" name="checkin"  required>
-                <label class=" form-label" for="checkOut">Check-out date:</label>
+                <label class=" form-label" for="checkOut">Check-out Date:</label>
                 <input class='from-control' type="date" id="checkout" name="checkout" required>
-            <button  type="submit" class='btn btn-outline-success'>Check Availability</button>
+            <button  type="submit" class='btn btn-outline-dark' id='check_btn'>Check Availability</button>
         </form>
     </div>
 
 
     <p class='fs-4 text-center'>Rooms Availability</p>
     <p class="fs-5 text-center">From {{checkin}} to {{checkout}}</p>
-    {% if available_rooms%}
-        {% for r in available_rooms  %}
-        
-                <div class='row d-flex'>
-                    <div class="card my-2"  style="width: 18rem;">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Room No: {{r.room_no}} </li>
-                            <li class="list-group-item">Room Type: {{r.room_type}}</li>
-                            <li class="list-group-item">Price: Rs<b> {{r.price}}</b></li>
-                            <form action="bookings" method='POST'>
-                                {% csrf_token %}
-                                <input hidden type='text' name='checkin' value='{{checkin}}'>
-                                <input hidden type='text' name='checkout' value='{{checkout}}'>
-                                <input hidden type='number'name='room_id' value='{{r.id}}'>
+    <div class='container' >
 
-                                <button type='submit' class="btn btn-success mb-2">Book</button>
-                            </form>
-                        </ul>
-                    </div>
-                </div>
-        {% endfor %}
-    {% else %}
-        <h4 class="text-center">No Rooms Found</h4>
-    {% endif %}
+    
+
+
+        <div class='row'id='rooms_show'>
+            {% if available_rooms%}
+                {% for r in available_rooms  %}
+                
+                        
+                            <div class="card col-sm-3" id="single_room">
+                                <ul class="list-group list-group-flush" >
+                                    <li class="list-group-item">Room No: {{r.room_no}} </li>
+                                    <li class="list-group-item">Room Type: {{r.room_type}}</li>
+                                    <li class="list-group-item">Price: Rs<b> {{r.price}}/day</b></li>
+                                    <form action="bookings" method='POST'>
+                                        {% csrf_token %}
+                                        <input hidden type='text' name='checkin' value='{{checkin}}'>
+                                        <input hidden type='text' name='checkout' value='{{checkout}}'>
+                                        <input hidden type='number'name='room_id' value='{{r.id}}'>
+                                        <input hidden type='number'name='version' value='{{r.version}}'>
+
+                                        <button type='submit' class="btn btn-success" id='book_btn'>Book</button>
+                                    </form>
+                                </ul>
+                            </div>
+                        
+                {% endfor %}
+            {% else %}  
+                <h4 class="text-center">No Rooms Found</h4>
+            {% endif %}
+            </div>
+        </div>
     
 </div>
 

@@ -18,6 +18,7 @@ urlpatterns = [
     path('payment_status', views.payment_status, name='payment_status'),
     path('confirmed', views.confirm_booking, name='confirmed'),
     path('past_booking', views.past_booking, name='past_booking'),
+    path('ratings', views.ratings, name='ratings'),
 
 
 

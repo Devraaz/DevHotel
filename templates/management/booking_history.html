@@ -3,15 +3,68 @@
 {% block title %}Booking History{% endblock title %}
 {% block head %}
 
-{% endblock head %}
+<style>
+  #cust_id{
+    width: 70px;
+    border: 2px solid black;
+    border-radius: 2px;
+    opacity: 0.4;
+    transition: 0.5s ;
+  }
+  #cust_id:hover{
+    opacity: 1;
+    scale: 7;
+  }
+  form{
+    font-size: 20px;
+    padding: 20px;
 
+  }
+  form .btn{
+      margin: 10px;
+      padding-left: 50px;
+      padding-right: 50px;
+  }
+
+</style>
+{% endblock head %}
 {% block body %}
 
-<h1 class='text-center'>Hello {{request.session.staff_name}}</h1>
 <div class='container'>
 
-    <h1 class='text-center'> Bookings History </h1>
-    <h2>FILTER</h2>
+    <h1 class='text-center fw-normal' style='text-transform: uppercase;'> Bookings History </h1>
+    <form method="GET">
+      <div class="row">
+        
+        <div class="col-md-2">
+          <label class='form-label' for="price">Booking ID</label>
+          <input class='form-control 'id='book_id' type="number" name='book_id'>
+        </div>
+          <div class="col-md-2">
+            <label class='form-label' for="name">Name:</label>
+            <input class='form-control ' id='name' type="text" name='name'>
+        </div>
+          <div class="col-md-2">
+            <label class='form-label' for="email">Email:</label>
+            <input class='form-control 'id='email' type="text" name='email'>
+        </div>
+          <div class="col-md-2">
+              <label class='form-label' for="room_no">Room No.:</label>
+              <input class='form-control ' id='room_no' type="number" name='room_no'>
+          </div>
+          <div class="col-md-2">
+              <label class='form-label' for="checkin">Checkin</label>
+              <input class='form-control ' id='checkin' type="date" name='checkin'>
+          </div>
+          <div class="col-md-2">
+            <label class='form-label' for="name">Order ID:</label>
+            <input class='form-control ' id='order_id' type="text" name='order_id'>
+          </div>
+          
+      </div>
+      <button class="btn btn-success">Search</button>
+      <a class="btn btn-outline-primary" href='book_history'>Reset</a>
+    </form>
     <HR>
       <div class='container table-responsive'>
       <table class="table">
@@ -21,7 +74,7 @@
               <th scope="col">Customer Name</th>
               <th scope="col">Custoemr Phone</th>
               <th scope="col">Customer Email</th>
-              <th scope='col'>Id Proof</th>
+              <th scope='col'>ID Proof</th>
               <th scope='col'>Room No.</th>
               <th scope="col">Room Type</th>
               <th scope="col">Checkin Date</th>
@@ -45,7 +98,7 @@
                   <td>{{b.cust_name}}</td>
                   <td>{{b.cust_phone}}</td>
                   <td>{{b.cust_email}}</td>
-                  <td>{{b.cust_idproof}}</td>
+                  <td><img class='img-fluid' src="{{b.cust_idproof.url}}" alt="ID Proof" id='cust_id'></td>
                   <td>{{b.room_no}}</td>
                   <td>{{b.room_type}}</td>
                   <td>{{b.checkin}}</td>
@@ -75,5 +128,36 @@
 <script>
   var act = document.getElementById('booking_history');
   act.classList.add('active');
+</script>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const book_id = urlParams.get('book_id');
+  const name = urlParams.get('name');
+  const email = urlParams.get('email');
+  const checkin = urlParams.get('checkin');
+  const room_no = urlParams.get('room_no');
+  const order_id = urlParams.get('order_id');
+
+  // Set the values of the date fields if they exist in the query string
+  if (book_id) {
+  document.getElementById('book_id').value = book_id;
+  }
+  if (name) {
+  document.getElementById('name').value = name;
+  }
+  if (email) {
+  document.getElementById('email').value = email;
+  }
+  if (room_no) {
+  document.getElementById('room_no').value = room_no;
+  }
+  if (checkin) {
+  document.getElementById('checkin').value = checkin;
+  }
+  if (order_id) {
+  document.getElementById('order_id').value = order_id;
+  }
+
 </script>
 {% endblock body %}

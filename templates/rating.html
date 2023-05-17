@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+{% block head %}
+<style>
+    /* CSS styles for rating stars */
+    .rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        text-align: center;
+    }
+    .rating > span {
+        display: inline-block;
+        position: relative;
+        width: 1.1em;
+    }
+    .rating > span:before {
+        content: '\2605';
+        position: absolute;
+        color: #FFD700;
+    }
+</style>
+{% endblock head %}
+
+{% block body %}
+<h1>Hotel Reviews</h1>
+
+<h2>Hotel Name</h2>
+<p>Average Rating: <span id="average-rating">4.5</span></p>
+
+<h3>Customer Reviews</h3>
+<ul id="reviews-list">
+    <li>
+        <div class="rating">
+            <span style="width: 80%"></span>
+        </div>
+        <p>Excellent hotel. Great service!</p>
+        <p>Reviewed by: John Doe</p>
+    </li>
+    <li>
+        <div class="rating">
+            <span style="width: 60%"></span>
+        </div>
+        <p>Nice hotel, but the rooms are a bit small.</p>
+        <p>Reviewed by: Jane Smith</p>
+    </li>
+    <!-- Add more review items dynamically -->
+</ul>
+
+<h3>Submit a Review</h3>
+<form id="review-form">
+    <div>
+        <label for="rating">Rating:</label>
+        <div class="rating" id="rating-stars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div>
+        <label for="comment">Comment:</label>
+        <textarea id="comment" rows="4" cols="50"></textarea>
+    </div>
+    <button type="submit">Submit Review</button>
+</form>
+
+
+{% endblock body %}

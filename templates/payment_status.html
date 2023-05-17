@@ -1,19 +1,73 @@
 {% extends 'base.html' %}
 
-{% block title %}{% endblock title %}
+{% block title %}Payment Status{% endblock title %}
+{% block head %}
+<style>
+    .payment_info{
+        border: 2px solid black;
+        border-radius: 20px;
+        margin: auto;
+        width: 60%;
+        padding: 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+    }
+    .payment_info .pay_head{
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+
+    }
+    .payment_info .pay_sub{
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        
+    }
+    .payment_info .pay_details{
+        font-size: 22px;
+
+
+    }
+    @media screen and (max-width: 880px) {
+        .payment_info{
+            width: 80%;
+
+        }
+        .payment_info .pay_head{
+            font-size: 22px;
+        }
+        .payment_info .pay_sub{
+            font-size: 14px;
+        }
+        .payment_info .pay_details{
+            font-size: 16px;
+        }    
+        
+    }
+</style>
+{% endblock head %}
+
 
 {% block body %}
 {% if request.session.cust_id %}
-    <div class="container">
-        <p class="text-center"> <b>Payment successful</b></p><br>
+    <div class="container-fluid" style= 'background-color: #ebedf0;'>
+        <p class="text-center" style='font-size: 30px;'> Payment Status</p><br>
         <p class="text-center"> <b>{{error_message}}</b></p><br>
-
-        <b>Payment ID:{{payment_id}}</b><br>
-        <b>Order ID:{{order_id}}</b><br>
-        <form method='POST' action='confirmed'>
-            {% csrf_token %}
-            <button type = 'submit' class="btn btn-success">Confirm</button>
-        </form>
+        <div class='card payment_info'>
+            <p class='card-title pay_head'>Your Payment Details</p>
+            <p class='pay_sub'>Confirm Your Booking</p>
+            <p class='pay_sub'>(Booking is not Confirmed until you Press 'Confirm')</p>
+            <p class='pay_details'>Payment ID: {{payment_id}}</p><br>
+            <p class='pay_details'>Order ID: {{order_id}}</p><br>
+            <p class='pay_details'>Payment Amount: {{amount}}</p><br>
+            <form method='POST' action='confirmed'>
+                {% csrf_token %}
+                <button type = 'submit' class="btn btn-success">Confirm</button>
+            </form>
+         </div>
     </div>
 
 {% else %}<a href="{% url 'login' %}">Login</a> to continue

@@ -2,14 +2,35 @@
 
 {% block title %}Payments{% endblock title %}
 {% block head %}
+<style>
+    form{
+        font-size: 20px;
+        padding: 20px;
 
+    }
+    form button{
+        margin: 10px;
+    }
+</style>
 {% endblock head %}
 
 {% block body %}
 
-<h1 class='text-center'>Paisa he Paisa {{request.session.staff_name}}</h1>
-
-<div class='container table-responsive'>
+<h1 class='text-center fw-normal' style='text-transform: uppercase;'>PAYMENTS</h1>
+<form method="GET">
+    <div class="row">
+        <div class="col-md-3">
+            <label class='form-label' for="order_id">Order ID:</label>
+            <input class='form-control ' type="text" name='order_id'>
+        </div>
+        <div class="col-md-3">
+            <label class='form-label' for="payment_id">Payment ID:</label>
+            <input class='form-control ' type="text" name='payment_id'>
+        </div>
+    </div>
+    <button class="btn btn-primary">Search</button>
+</form>
+<div class='container table-responsive' style='background-color: #ebedf0;'>
     <table class="table">
         <thead class="thead-dark">
         <tr>

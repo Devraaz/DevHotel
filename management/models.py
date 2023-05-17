@@ -50,6 +50,8 @@ class room_details(models.Model):
     price = models.IntegerField()
     book_id = models.IntegerField(blank = True, null=True, default = None)
 
+    version = models.IntegerField(default=0)
+
     def __str__(self):
         return str(self.room_no)
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from management.models import staff_user, room_details, payments, booking, booking_history
 from django.contrib import messages
 from datetime import datetime
+from django.db.models import Q
 from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
@@ -44,8 +45,6 @@ def staff_logout(request):
 def dashboard(request):
     
     return render(request, 'management/dashboard.html')
-
-        
 
 def add_rooms(request):
     if request.method == 'POST':
@@ -111,6 +110,35 @@ def see_rooms(request):
         else:
             messages.info(request, 'There is some problems')
             return render('cust_bookings' )
+        
+    if request.method == 'GET':
+        room_no  = request.GET.get('room')
+        room_type  = request.GET.get('room_type')
+        booked  = request.GET.get('booked')
+        checkin  = request.GET.get('checkin')
+        price  = request.GET.get('price')
+
+        if room_no or room_type or booked or checkin or price:
+            data = room_details.objects.all()
+            if room_no:
+                data = data.filter(room_no=int(room_no))
+
+            if room_type:
+                data = data.filter(room_type__icontains=room_type)
+
+            if booked:
+                data = data.filter(is_booked__icontains=booked)
+
+            if checkin:
+                data = data.filter(checkInDate=checkin)
+
+            if price:
+                data = data.filter(price__lte=price)
+
+                 
+            return render( request,'management/see_rooms.html', {'data': data })
+
+
     data = room_details.objects.filter()
     return render( request,'management/see_rooms.html', {'data': data })
 
@@ -154,8 +182,21 @@ def update_room(request):
     return render(request, 'management/update_room.html')
     
 def cust_bookings(request):
+    if request.method == 'GET':
+        name  = request.GET.get('name')
+        phone  = request.GET.get('phone')
+        room_no  = request.GET.get('room')
+
+        if name or phone or room_no:
+            book = booking.objects.filter(Q(cust_name__icontains=name)
+                                        & (Q(cust_phone__exact=phone) if phone else Q())
+                                        & (Q(room_no__exact=room_no) if room_no else Q())
+                                          )
+            
+            return render(request, 'management/cust_bookings.html', {'book': book})
+
     book = booking.objects.all()
-    
+
     return render(request, 'management/cust_bookings.html', {'book': book})
 
 def book_history(request):
@@ -190,9 +231,51 @@ def book_history(request):
         else:
             messages.info(request, "Room is Already Checked Out")
             return render(request, 'management/see_rooms.html')
-    
+    if request.method == 'GET':
+        
+        book_id = request.GET.get('book_id')
+        name = request.GET.get('name')
+        email = request.GET.get('email')
+        room_no = request.GET.get('room_no')
+        checkin = request.GET.get('checkin')
+        order_id = request.GET.get('order_id')
+
+        book = booking_history.objects.all()
+
+        if name:
+            book = book.filter(cust_name__icontains=name)
+
+        if email:
+            book = book.filter(cust_email__icontains=email)
+
+        if room_no:
+            book = book.filter(room_no__exact=room_no)
+
+        if checkin:
+            book = book.filter(checkin=checkin)
+
+        if book_id:
+            book = book.filter(id__exact = book_id)
+
+        if order_id:
+            book = book.filter(order_id__contains=order_id)
+        
+        return render(request, 'management/booking_history.html', {'book': book})
+
+
+
+
     return render(request, 'management/booking_history.html', {'book': book})
 
 def payment(request):
+    if request.method == 'GET':
+        order_id  = request.GET.get('order_id')
+        payment_id  = request.GET.get('payment_id')
+        if order_id is not None or payment_id is not None:
+            pay = payments.objects.filter(razorpay_order_id__icontains=order_id,  razorpay_payment_id__icontains=payment_id)
+        
+
+
+            return render(request, 'management/payments.html', {'pay': pay})        
     pay = payments.objects.all()
     return render(request, 'management/payments.html', {'pay': pay})

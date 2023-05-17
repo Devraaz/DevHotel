@@ -1,16 +1,54 @@
 {% extends 'management/based.html' %}
 
-{% block title %}Dashboard{% endblock title %}
+{% block title %}See Rooms{% endblock title %}
 {% block head %}
+<style>
+    form{
+        font-size: 20px;
+        padding: 20px;
 
+    }
+    form .btn{
+        margin: 10px;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+  
+</style>
 {% endblock head %}
 
 {% block body %}
 
-<h1 style='text-align: center;padding: 10px;'>ROOM DETAILS</h1>
+<h1 style='text-align: center;padding: 10px;' class='fw-normal'>ROOM DETAILS</h1>
 <div class="filter">
 <h4>Filters</h4>
-Room No &nbsp; Room Type &nbsp; is Booked
+<form method="GET">
+    <div class="row">
+        <div class="col-md-2">
+            <label class='form-label' for="room_no">Room No.:</label>
+            <input class='form-control ' id='room' type="number" name='room'>
+        </div>
+        <div class="col-md-2">
+            <label class='form-label' for="room_type">Room Type.:</label>
+            <input class='form-control 'id='room_type' type="text" name='room_type'>
+        </div>
+        <div class="col-md-2">
+            <label class='form-label' for="is_booked">Is Booked</label>
+            <input class='form-control 'id='booked' type="text" name='booked'>
+        </div>
+        <div class="col-md-2">
+            <label class='form-label' for="checkin">Checkin</label>
+            <input class='form-control 'id='checkin' type="date" name='checkin'>
+        </div>
+        <div class="col-md-2">
+            <label class='form-label' for="price">Price</label>
+            <input class='form-control 'id='price' type="number" name='price'>
+        </div>
+        
+    </div>
+    <button class="btn btn-success">Search</button>
+    <a href="see_rooms" class="btn btn-outline-primary">Reset</a>
+</form>
 </div>
 <div class='container table-responsive'>
     <table class="table">
@@ -58,5 +96,34 @@ Room No &nbsp; Room Type &nbsp; is Booked
 <script>
   var act = document.getElementById('see_rooms');
   act.classList.add('active');
+</script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    const room = urlParams.get('room');
+    const room_type = urlParams.get('room_type');
+    const is_booked = urlParams.get('booked');
+    const checkin = urlParams.get('checkin');
+    const price = urlParams.get('price');
+  
+    // Set the values of the date fields if they exist in the query string
+  
+    if (room) {
+    document.getElementById('room').value = room;
+    }
+    if (room_type) {
+    document.getElementById('room_type').value = room_type;
+    }
+    if (is_booked) {
+    document.getElementById('is_booked').value = is_booked;
+    }
+    if (checkin) {
+    document.getElementById('checkin').value = checkin;
+    }
+    if (price) {
+    document.getElementById('price').value = price;
+    }
+  
+  
 </script>
 {% endblock body %}

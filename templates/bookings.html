@@ -17,18 +17,19 @@
 {% endblock head %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid" style= 'background-color: #ebedf0; margin-top: 0; '>
     {% if request.session.cust %}
-    <div class="card " style="width: 30rem; margin: auto; margin-top: 5px; ">
+    <div class="card " style="width: 30rem; border-radius: 20px; margin: auto; box-shadow: 1px 1px 20px 5px grey;">
         <div class="card-body">
-          <h5 class="card-title fs-2">Confirm Booking</h5>
+          <h5 class="card-title fs-2 text-center " style='text-transform: uppercase;'>Confirm Booking</h5>
           <h6 class="card-subtitle mb-2 text-muted fs-4">From {{checkin}} to {{checkout}}</h6>
           <p class="card-text fs-4">
             Room Number: {{room.room_no}}<br>
             Room Type: {{room.room_type}}<br>
           <form action='payment_status' method="POST">
             {% csrf_token %}
-            Room Price: <b>{{new_price}}</b></p>
+            Room Price: <b>{{new_price}}</b>
+          </p>
             <input hidden type='number' name='price' value="{{new_price}}">
           
           <button  id="rzp-button1" type='submit' class="card-link btn btn-success">Proceed to Pay</button>
@@ -105,9 +106,9 @@
       "key": "rzp_test_DBcd3uPhflsxUe", // Enter the Key ID generated from the Dashboard
       "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       "currency": "INR",
-      "name": "Dev Palace Hotel", //your business name
+      "name": "DEV PALACE HOTEL", //your business name
       "description": "Room Booking",
-      "image": "https://example.com/your_logo",
+      "image": "static/photos/logo2.jpg",
       "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1",
       "callback_url": "{% url 'payment_status' %}",
       "handler": function (response){

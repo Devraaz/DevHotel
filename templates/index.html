@@ -5,98 +5,419 @@
 {% block title %} Home {% endblock title %}
 {% block head %}
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 <style>
-    .checking_field{
-        margin: 50px auto;
-        width: 400px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px #ccc;
-        top: -200px;
+  .checking_field{
+    margin: 50px auto;
+    width: 800px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px  #100c1c;
+    position: relative;
 
-    }
-    .checking_field label{
-        font-size: 20px;
+}
+.checking_field label{
+    font-size: 20px;
 
-    }
-    .checking_field input{
-        border-radius: 5px;
-        display: block;
-        margin: 10px 0;
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-    }
+}
+.checking_field input{
+    border-radius: 5px;
+    display: inline;
+    margin: 10px 0;
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
     @media screen and (min-width: 800px) {
       #about{
         font-size: 20px;
+      }
+    }
+    .checking_field{
+
+    }
+    video {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    .cont{
+      width: 100%;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      
+    }
+    .cont p{
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 30px;
+      font-size: 40px;
+      bottom: 40px;
+      opacity: 0;
+      text-shadow: 0px 0px 3px white;
+      
+
+    }
+    .btn{
+      height: 40px;
+      bottom: 0px;
+    }
+    .amini{
+      margin: 0px;
+      
+    }
+    .amini p{
+      width: 50%;
+      text-align: left;
+      margin: 5px;
+      padding: 30px;
+      font-size: 20px;
+      
+    }
+    .amini p span{
+      text-transform: uppercase;
+      font-size: 50px;
+      letter-spacing: 10px;
+    }
+    .amini img{
+      width: 55%;
+     
+    }
+    .parallax{
+      position: relative;
+      display:flex;
+      min-height: 500px;
+      flex-direction: column;
+      align-items: center;
+      
+    }
+    .parallax::before{
+      content: "";
+      top: 0px;
+      left: 0px;
+      background: url('static/photos/bg5.jpg');
+      position: absolute;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100%;
+      width: 100%;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0.3;
+    }
+    #about, #rating{
+      width: 70%; 
+      margin: auto;
+      font-size: 25px
+    }
+    .image_cont{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      margin: auto;
+      align-items: center;
+    }
+    .image_cont img{
+      margin: 20px;
+      width: 90%;
+      opacity: 0.7;
+      transition: 0.2s linear;
+
+    }
+    .image_cont img:hover{
+      opacity: 1;
+      transform: scale(1.2);
+
+    }
+    .image_cont p{
+      position: relative;
+      margin: auto;
+      margin-bottom: 20px;
+      top: 20px;
+      width: 60%;
+      border-top: 3px solid black;
+      border-bottom: 3px solid black;
+      text-align: center;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      font-size: 35px;
+      padding: 10px;
+
+    }
+    .room_show{
+      display: flex;
+      justify-content: space-between;
+
+    }
+
+    .rating_n_review{
+      display: flex;
+      justify-content: space-between;
+      font-weight: normal;
+      width: 100%;
+      text-transform: uppercase;
+      flex-direction: row;      
+
+    }
+    .rating{
+      font-size: 22px;
+      letter-spacing: 10px;
+      border-right: 2px solid black;
+      width: 100%;
+    }
+    .review{
+      font-size: 22px;
+      letter-spacing: 10px;
+      border-left: 2px solid black;
+      width: 100%;
+    }
+    
+    .rating-container {
+      display: inline-block;
+  }
+  
+    .submit_rating{
+      width: 90%; 
+      margin: auto; 
+      height: 300px; 
+      font-size: 25px;
+      font-style: italic;
+      font-family: 'Courier New';
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+    }
+    #rating-stars i{
+      padding: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      font-size: 30px;
+    }
+    #rating-stars i:hover{
+      color: orange;
+    }
+
+
+    .com-star, .fa-star-half-alt, .active{
+      color: orange;
+    }
+
+    .review_text{
+      width: 60%;
+      margin: auto;
+      
+    }
+    .star_rating{
+      display: flex;
+      width: 80%;
+      padding: 10px;
+      flex-direction: row;
+      margin: auto;
+      align-items: center;
+      text-align: center;
+    }
+
+    .star_rating i{
+      width: 19%;
+      height: 70px;
+      padding: 10px;
+      font-size: 40px;
+    }
+    .showing_review{
+      background: url('static/photos/logo1.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 90%;
+      margin-bottom: 2px;
+      padding: 20px;
+      margin-top: 30px;
+      margin: auto;
+      text-transform: none;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+
+    .connection{
+      display: flex;
+      margin: auto;
+      
+    }
+    .connection .social_media{
+      display: flex;
+      margin: auto;
+      flex-direction: column;
+    }
+    .connection .social_media i{
+      font-size: 30px;
+      display: flex;
+      padding: 10px;
+      mouse: pointer;
+      flex-direction: column;
+    }
+    .connection .social_media i:hover{
+      text-shadow: 3px 3px 10px grey;
+
+    }
+    .connection .connect_instant{
+      width: 35%;
+      margin: auto;
+      padding: 20px;
+    }
+    .connection .connect_instant form{
+      padding: 10px;
+      width: 100%;
+
+    }
+    .connection .connect_instant form label{
+      font-size: 20px;
+      width: 90%;
+    }
+    .connection .connect_instant form input{
+      font-size: 20px;
+      width: 90%;
+    }
+
+
+    @media screen and (max-width:800px) {
+      .cont p{
+        font-size: 15px;
+        letter-spacing: 10px;
+
+      }
+      .amini{
+        flex-direction: column;
+      }
+      .amini p{
+        width: 90%;
+        font-size: 18px;
+      }
+      .amini p span{
+        font-size: 30px;
+      }
+      .amini img{
+        width: 100%;
+      }
+      #about, #rating{
+        font-size: 14px;
+      }
+      .room_show{
+        flex-direction: column;
+      }
+      .image_cont p{
+        font-size: 20px;
+      }
+      .rating_n_review{
+        flex-direction: column
+      }
+      .rating{
+        
+      border-right: none;
+      border-bottom: 2px solid black;
+      }
+      .review{
+        border-left: none;
+      }
+      
+      .rating p{
+        font-size: 18px;
+      }
+      .submit_rating{
+        font-size: 18px;
+      }
+      #rating-stars i{
+        padding: 10px;
+        font-size: 18px;
+      }
+      .star-rating{
+        font-size: 25px;
+        width: 100%;
+        
+      }
+      .star-rating i{
+        font-size: 25px;
+      
+      }
+      .star-rating .fas{
+        font-size: 25px;
+      }
+      .showing_review{
+        font-size:18px;
+      }
+      .connection{
+        flex-direction: column;
+      }
+      .connection .social_media{
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: row;
+      }
+      .connection .connect_instant{
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+      }
+      .connection .connect_instant form label{
+        font-size: 20px;
+        width: 90%;
+      }
+      .connection .connect_instant form input{
+        font-size: 20px;
+        width: 90%;
       }
     }
 </style>
 {% endblock head %}
 
 {% block body %}
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="4000">
-        <img src="static/photos/bg2.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>The Finest Hotel</h5>
-          <p>Some representative placeholder content for the first slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="4000">
-        <img src="static/photos/bg4.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Dev and Luxrious</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="4000">
-        <img src="static/photos/bg3.png" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>The Classy</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  <br>
-  <div class="container h-50" >
-    <h1 id="room_book" class='text-center'>Book Your Rooms</h1>
-    <div class="container text-center d-flex justify-content-center">
-        <form method='GET' action='check_rooms' class="mx-auto checking_field">
-            {% csrf_token %}
-            <label class=" form-label " for="checkIn">Check-in date:</label>
-            <input class='from-control' type="date" id="checkin" name="checkin" required>
-            <label class=" form-label" for="checkOut">Check-out date:</label>
-            <input class='from-control' type="date" id="checkout" name="checkout" required><br>
-            <button  type="submit" class='btn btn-outline-success'>Check Availability</button>
-        </form>
-    </div>
+<video autoplay loop muted>
+  <source src="static/photos/vid1.mp4" type="video/mp4">
+  <!-- Add additional source elements for other video formats -->
+</video>
+<div class="cont">
+  <p class='fw-strong'id='text1'>Dev Palace Hotel</p>
 </div>
 
-<div class='container section-2 '>
-  <span class='d-flex justify-content-center' data-aos="flip-up" data-aos-anchor-placement="top-center"><img  class='img-fluid' style ='margin: auto;' src='{% static 'photos/logo1.png' %}'></span>
-    <h1 class="text-center">ABOUT</h1>
 
-    <p id='about'>
+  <br>
+  <div class="container-flex" >
+    <div class="container text-center d-flex justify-content-center ">
+      <form method='GET' action='check_rooms' data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000" class="mx-auto checking_field ">
+          {% csrf_token %}
+              <label class=" form-label " for="checkIn">Check-in Date:</label>
+              <input class='from-control' type="date" id="checkin" name="checkin"  required>
+              <label class=" form-label" for="checkOut">Check-out Date:</label>
+              <input class='from-control' type="date" id="checkout" name="checkout" required>
+          <button  type="submit" class='btn btn-outline-dark'>Check Availability</button>
+      </form>
+  </div>
+</div>
+
+<div class="parallax">
+<div class='container-fluid section-2 ' style='position: relative;'>
+  <span class='d-flex justify-content-center' data-aos="flip-up" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom" style=''><img  class='img-fluid' style ='margin: auto; drop-shadow: 2px 2px 10px green;' src='{% static 'photos/logo_rb.png' %}'></span>
+  
+    <h1 class="text-center fw-normal" style='letter-spacing: 10px'>ABOUT</h1>
+    
+    <p id='about' style='' class='fst-italic text-center'>
         &nbsp; The Dev Palace Hotel is a luxurious and opulent establishment 
         that boasts a blend of classic and contemporary architecture. It offers
          a range of spacious and elegantly furnished accommodations, from rooms 
@@ -108,101 +429,91 @@
             is known for its exceptional service, with a team of dedicated staff that 
             goes above and beyond to ensure that every guest's needs are met.
     </p>
+  </div>
+  <br>
 </div>
+<br>
 
-<div class='container-fluid'>
-    <h1 class='text-center' style='color: #FFD700'>Amenities</h1>
-
-    <div class="container ">
-        <div class="row text-center mx-auto" >
-            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "data-aos="fade-up" data-aos-duration="2000">
-                <img src="static/photos/wifi.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Free Wifi</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                
-                </div>
-            </div>
-        
-
-            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "   data-aos="fade-up" data-aos-duration="1000">
-                <img src="static/photos/pool.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Swimming Pool</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                
-                </div>
-            </div>
-
-            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "   data-aos="fade-up" data-aos-duration="3000">
-                <img src="static/photos/gym.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Gym</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                
-                </div>
-            </div>
-        </div>
-
-        <div class="row text-center"  >
-            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "data-aos="fade-up" data-aos-duration="1000">
-                <img src="static/photos/parking.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Parking Hall</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                
-                </div>
-            </div>
-        
-
-            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "data-aos="fade-up" data-aos-duration="3000">
-                <img src="static/photos/dining hall.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Dining Hall</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                
-                </div>
-            </div>
-
-            <div class="card col-sm-3" style=" font-size: 18px; padding: 10px;margin: 4%; "data-aos="fade-up" data-aos-duration="2000">
-                <img src="static/photos/casino.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Casino</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                
-                </div>
-            </div>
-        </div>
+<div class='container-fluid' style='overlow-x: hidden;'>
+    <h1 class='text-center fw-normal' style='letter-spacing: 12px;'>AMENITIES</h1>
+      <section class="amini d-flex justify-content-between mx-0" >
+        <img src="{% static 'photos/lounge.png' %}" alt="POOL" class='img-fluid' data-aos="fade-right"  data-aos-duration="1000">
+        <p class='text-amz' data-aos="fade-up"  data-aos-duration="2000">
+          <span class='fst-italic text-center mx-auto'>Opulent Lounge</span><br>
+          &nbsp; "Indulge in lavish luxury at our opulent lounge, where every detail 
+          exudes sophistication and grandeur. Immerse yourself in a world of plush furnishings,
+           ornate decor, and an ambiance that whispers of royalty. Sip on decadent cocktails, 
+           savor gourmet delights, and immerse yourself in an unrivaled atmosphere of opulence
+            and exclusivity. Welcome to indulgence redefined."
+        </p>
+      </section>
+      <section class="amini d-flex justify-content-between mx-0" style='overflow: hidden;'>
+        <p class='text-amz' data-aos="fade-up"  data-aos-duration="2000">
+          <span class='fst-italic text-center mx-auto'>ProActive Gym</span><br>
+             &nbsp; "Unleash your inner strength and defy limits at our state-of-the-art gym. 
+            Experience a dynamic fitness journey tailored to your goals with our cutting-edge
+            equipment, expert trainers, and energizing atmosphere. Push your boundaries, sculpt 
+            your body, and embrace a healthier lifestyle. Join us today and let your fitness story begin."
+              
+        </p>
+        <img src="{% static 'photos/gym2.png' %}" alt="GYM" class='img-fluid' data-aos="fade-left"  data-aos-duration="1000">
+      </section>
+      <section class="amini d-flex justify-content-between mx-0" >
+        <img src="{% static 'photos/pool2.png' %}" alt="POOL" class='img-fluid' data-aos="fade-right"  data-aos-duration="1000">
+        <p class='text-amz' data-aos="fade-up"  data-aos-duration="2000">
+          <span class='fst-italic text-center mx-auto'>Majestic Pool</span><br>
+          &nbsp; "Dive into the lap of luxury at our majestic pool, where opulence 
+          meets tranquility. Immerse yourself in crystal-clear waters surrounded by 
+          breathtaking architecture and lush greenery. Indulge in a regal experience 
+          as you soak up the sun, unwind in style, and create memories that will last a lifetime."
+        </p>
+      </section>
+      <section class="amini d-flex justify-content-between mx-0" style='overflow: hidden;'>
+        <p class='text-amz' data-aos="fade-up"  data-aos-duration="2000">
+          <span class='fst-italic text-center mx-auto'>Imperial Casino</span><br>
+             &nbsp; "Indulge in the opulence and grandeur of the Imperial Casino, where regal 
+             entertainment awaits. Step into a realm of sophistication and let the allure of 
+             our lavish surroundings captivate you. Immerse yourself in a world of thrilling 
+             games, impeccable service, and unforgettable moments of luxury. Experience the 
+             pinnacle of elegance at the Imperial Casino."
+              
+        </p>
+        <img src="{% static 'photos/casino2.png' %}" alt="GYM" class='img-fluid' data-aos="fade-left"  data-aos-duration="1000">
+      </section>
         
         
            
 </div>
 
 
-
+<br>
 <!---To be entered from backend-->
-<div class='container'>
-    <h1 class='text-center'> Gallery</h1>
-    <div class='row'>
-        <div class="card col-sm-3" style="border: 5px solid black;margin: 4%; ">
-            <img src="static/photos/dining hall.jpg" class="card-img-top" alt="...">
-            
-        </div>
+<h1 class='text-center fw-normal' style='letter-spacing: 10px; text-transform: uppercase; '> Room Types</h1><br>
+<div class='container room_show'  style='' id='room_i'>
+    <div class="image_cont">
+      <p>Single</p>
+      <img class='img-fluid mx-auto' src="{% static 'photos/single_room.png' %}" alt='Single Room';>
     </div>
-
-
+    <div class="image_cont">
+      <img class='img-fluid mx-auto' src="{% static 'photos/double_room.png' %}" alt='Single Room';>
+      <p>Double</p>
+    </div>
+    
 </div>
 
-<div class="container-fluid">
-    <h1 class="text-center">See Us on Map</h1>
-    <div id='map' style='width: 90%; height: 400px; margin: auto; font-size: 1.4rem;'></div>
+<br>
+
+
+<div class="container-fluid" style='background: linear-gradient(white, #ebedf0 );'>
+    <h1 class="text-center fw-normal" style='text-transform: uppercase;letter-spacing: 10px;'>See Us on Map</h1>
+    <div id='map' style='width: 90%; height: 400px; margin: auto; font-size: 1.4rem; box-shadow: 10px 10px 30px grey;'></div>
         <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
         <script>
                 
             
                 var lat="18.9217";
                 var lng = "72.8332";
-                var hstl_name = "Dev Palace Hotel"
+                var hstl_name = "DEV PALACE HOTEL"
                 
                 var map = L.map('map').setView([lat, lng], 16);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -215,15 +526,133 @@
             
         </script>
 </div>
+<div class='container-fluid' style= 'background: linear-gradient(#ebedf0, white);'>
+  <br><br>
+  <h1 class='fw-normal p-2 text-center' style='text-transform: uppercase; letter-spacing: 10px;'>Rating and Reviews </h1>
+  <p class="text-center fw-noraml" id='rating'>"Your satisfaction is our top priority. If we managed to make your 
+  stay truly remarkable, we would greatly appreciate your support with a good rating. It 
+  serves as a testament to our dedication to guest satisfaction."</p>
+  <div class='submit_rating text-center container' >
+      Do Rate Your Experience at our Palace
+      <div id="rating-stars">
+        <i class="fas fa-star" data-rating="1"></i>
+        <i class="fas fa-star" data-rating="2"></i>
+        <i class="fas fa-star" data-rating="3"></i>
+        <i class="fas fa-star" data-rating="4"></i>
+        <i class="fas fa-star" data-rating="5"></i>
+    </div>
+    <form method="POST" action=''>
+      {% csrf_token %}
+      <input hidden type='number' id="selected-rating" name="rating">
+      <div class="row">
+        <input type='textField' class='form-control review_text' name='review' placeholder=" Do write you Experience.....">
+      </div>
+      {% if request.session.cust %}
+      <button type="submit" class='btn btn-success' style='margin: 20px;'>Submit</button>
+      {% else %}
+      <p>(Login to Submit your Ratings)</p>
+      {% endif %}
+    </form>
+  </div>  
+
+  <div class="container rating_n_review">
+    <div class="rating text-center" data-aos="fade-right" data-aos-duration="1000">
+       Rating
+      <div class="star_rating">
+        {% if aggregate_rating %}
+            {% with rating=aggregate_rating|floatformat:1 %}
+                {% with full_stars=rating|floatformat:0 %}
+                    {% with half_star=rating|floatformat:1 %}
+                        {% if full_stars %}
+                            {% for i in "x"|center:full_stars %}
+                            <i class="fas fa-star com-star"></i>
+                            {% endfor %}
+                        {% endif %}
+                        {% if half_star != full_stars %}
+                            <i class="fas fa-star-half-alt"></i>
+                        {% endif %}
+                    {% endwith %}
+                {% endwith %}
+            {% endwith %}
+        {% else %}
+            No ratings available
+        {% endif %}
+      </div>
+      <b>{{aggregate_rating}}</b>
+      <p>You can see our Overall Rating</p>
+    </div>
+
+    <div class="review text-center" data-aos="fade-right" data-aos-duration="600">
+      Reviews
+      <div class="card showing_review text-left">
+            {% for r in last_rating  %}
+
+            <b>Name: </b> {{r.cust_name}}<br>
+            <b>Message: </b> {{r.review}}
+            {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="container-fluid">
+  <h1 class='fw-normal p-2 text-center' style='text-transform: uppercase; letter-spacing: 10px;'>contact us </h1>
+  <div class="connection">
+    <div class='social_media'>
+      <i class="fab fa-whatsapp" aria-hidden="true"></i>
+      <i class="fa fa-mobile" aria-hidden="true"></i>
+      <i class="fab fa-instagram" aria-hidden="true"></i>
+      <i class="fa fa-envelope" aria-hidden="true"></i>
+      <i class="fab fa-facebook-square" aria-hidden="true"></i>
+      <i class="fab fa-youtube-play" aria-hidden="true"></i>
+    </div>
+    <div class="connect_instant">
+      <form >
+        <label for="name" class='form_lable'>Name</label>
+        <input type="text" class='form-control col-3'>
+        <label for="email" class='form_lable'>Email</label>
+        <input type="email" class='form-control col-3'>
+        <label for="message" class='form_lable'>Message</label>
+        <textArea type="textArea" class='form-control col-3'></textArea>
+        <button class="btn btn-primary" style='margin: 5px;'>Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 
-
-
-
+    <script src="static/anime-master/lib/anime.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init();
+</script>
+<script>
+  
+
+  window.onscroll = function() {
+    let scroll = window.scrollY;
+    let room_i = document.querySelector('#room_i');
+
+    let room= room_i.getBoundingClientRect().top;
+
+    let screenPos = window.innerHeight;
+
+    console.log(room, screenPos)
+  
+  // Check if the current scroll position has reached the trigger point
+  if (room < screenPos/3) {
+    // Call your function
+    anime({
+      targets: '.stager ',
+      translateX: 200,
+      rotate: 180,
+      direction: 'alternate',
+      delay: anime.stagger(100) // increase delay by 100ms for each elements.
+    });
+  }
+};
 </script>
 <script>
 
@@ -251,5 +680,40 @@
     for (var i = 0; i < dateFields.length; i++) {
       dateFields[i].setAttribute('min', today);
     }
+</script>
+<script>
+  let text= document.querySelector('#text1');
+
+  sup=()=>{
+    let scroll= window.scrollY;
+    text.style.bottom = scroll *0.15+'px'
+    text.style.opacity =  scroll*0.1;
+  }
+  window.addEventListener('scroll', sup)
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var ratingStars = document.querySelectorAll("#rating-stars i");
+
+      ratingStars.forEach(function(star) {
+          star.addEventListener("click", function() {
+              // Remove the active class from all stars
+              ratingStars.forEach(function(star) {
+                  star.classList.remove("active");
+              });
+
+              // Add the active class to the clicked star and all previous stars
+              var rating = parseInt(this.getAttribute("data-rating"));
+              for (var i = 0; i < rating; i++) {
+                  ratingStars[i].classList.add("active");
+              }
+
+              // Set the selected rating value in the hidden input field
+              document.getElementById("selected-rating").value = rating;
+          });
+      });
+  });
 </script>
 {% endblock body %}

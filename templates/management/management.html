@@ -26,6 +26,13 @@
   .fade.out {
     opacity: 0;
   }
+  .back{
+    border-radius: 6px; 
+    margin: auto; 
+    margin-top: 40px;
+    padding: 30px; 
+    top: 50px;
+  }
 </style>
 
 {% endblock head %}
@@ -40,8 +47,9 @@
 {% endfor %}
 
 
-<div class="container text-white-50 bg-dark" style="border-radius: 6px; margin: auto; padding: 30px; top: 50px; postition: absolute;">
-    <h1 class='text-center'>Log In Here</h1>
+<div class="container text-white-50 bg-dark  back" style="">
+    <h1 class='text-center fw-normal' style='text-transform: uppercase;'>Log In Here</h1>
+    <h4 class='text-center fw-normal' style='text-transform: uppercase;'>(This is for management)</h4>
     <form method="POST"  style=' padding: 40px;'>
       {% csrf_token %}
         <!-- Email input -->

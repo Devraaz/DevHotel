@@ -1,27 +1,128 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Profile {% endblock title %}
-{% block head %}{% endblock head %}
+{% block head %}
+<style>
+    .greeting{
+        display: flex;
+        padding: 50px;
+        flex-direction: column;
+    }
+    #namaste{
+        width: 200px;
+        margin: auto;
+    }
+    .details{
+        border: 2px solid black;
+        background: url('static/photos/logo1.png');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        margin: 20px;
+    }
+    .details p{
+        font-size: 40px;
+        font-style: italic;
+        text-transform: uppercase;
+        font-weight: normal;
+        
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        text-align: center;
+        width: 100%;
+        margin: auto;
+    }
+    .details .prof{
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+        backdrop-filter: blur(5px);
+        padding: 20px;
+        margin: 10px;
+        width: 60%;
+        margin: auto;
+        margin-bottom: 20px;
+        border-radius: 20px;
+        border: 2px solid black;
+        flex-direction: row;
+        position: relative;
+    }
+    .prof label{
+        font-weight: normal;
+        font-size: 25px;
+    }
+    .prof input{
+        border: none;
+    }
+    #id_proof{
+        margin: 30px;
+        width: 100px;
+        border: 2px solid black;
+        border-radius: 20px;
+        box-shadow: 2px 2px 7px 1px grey;
+    }
+
+
+    @media screen and (max-width: 800px) {
+        
+        .details p{
+            font-size: 25px;
+        }
+        .details .prof{
+            width: 80%;
+        }
+        .prof label{
+            font-size: 20px;
+        }
+        }
+        .prof input{
+            font-size: 20px;
+        }
+        
+    }
+</style>
+{% endblock head %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid" style='background-color: #ebedf0;'>
     {% if request.session.cust %}
+    <div class="greeting">
         <h2 class='text-center'>Welcome {{request.session.cust}}</h2>
-        <h2 class='text-center'>Welcome {{request.session.cust_id}}</h2>
+        {% comment %} <h2 class='text-center'>Welcome {{request.session.cust_id}}</h2> {% endcomment %}
         <h4 class="text-center">Atithi Devo Bhava</h4>
-
-
-        <hr>
-        <b>Before Proceding Further Fill Up this</b>
-        <form method='POST' enctype="multipart/form-data">
+        <img class='img-fluid' id='namaste' src="static/photos/namaste2.png">
+        <p class='w-80 text-center'>(<b>Note: </b>Before proceding forward please upload your ID card below if Done then ignore this message)</p>
+    </div>
+    <hr>
+    <div class='details'>
+        <p>Your Details</p>
+        <div class="prof">
+           
+                <label for="name">Name: </label>
+                <input type='text' class='form-control form-control-lg' name='name' value="{{cust.name}}"disabled>
+                <label for="name">Email: </label>
+                <input type='text' class='form-control form-control-lg' name='email' value="{{cust.email}}"disabled>
+                <label for="name">Phone: </label>
+                <input type='text' class='form-control form-control-lg' name='phone' value="{{cust.phone_no}}"disabled>
+                <label for="name">Id Proof: </label>
+                {% if cust.c_idproof %}
+                    <img class='img-fluid' id='id_proof' src='{{cust.c_idproof.url}}'>
+                {% else %}
+                    <img class='img-fluid'  id='id_proof' src="{% static 'photos/profile_def.jpg' %}"  alt="Profile">
+                {% endif %}
+            
+        </div>
+        <p>Update Details</p>
+        <form method='POST' class='container prof' enctype="multipart/form-data">
             {% csrf_token %}
-        <div class="col-md-6 mb-4 pb-2">
-            <div class="form-outline">
-            <input type="file" id="cust_idproof" class="form-control form-control-lg" name='id_proof'  required camera='capture' multiple/>
-            <label class="form-label" for="cust_lname">ID Proof(ID Card/ Aadhar/DL/Passport)</label>
+            <div class="col-md-6 mb-4 pb-2">
+                <div class="form-outline">
+                    <input type="file" id="cust_idproof" class="form-control form-control-lg" name='id_proof'  required camera='capture' multiple/>
+                    <label class="form-label" for="cust_lname">ID Proof(ID Card/Aadhar/DL/Passport)</label>
+                </div>
+                <button type = "submit" class="btn btn-primary">Submit</button>
             </div>
-            <button type = "submit" class="btn btn-primary">Submit</button>
-          </div>
-
+        </form>
+    </div>
     {% else %}
         <a href="{% url 'login' %}">Login</a> to continue
     {% endif %}

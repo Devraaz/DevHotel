@@ -15,10 +15,10 @@
     {% endblock head %}
 </head>
 <body>
-    <nav class="navbar bg-light d-flex justify-content-between">
+    <nav class="navbar bg-dark d-flex justify-content-between">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'home' %}">
-            <img id='logo' style = 'width: 100px;' src="{% static 'photos/logo1.png' %}">
+            <img id='logo' style = 'width: 100px;' src="{% static 'photos/logo_rb.png' %}">
           </a>
         
           {% if request.session.staff %}

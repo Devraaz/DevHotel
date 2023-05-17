@@ -1,12 +1,57 @@
 {% extends 'base.html' %}
 
-{% block title %}{% endblock title %}
+{% block title %} Booking Status{% endblock title %}
+{% block head %}
+<style>
+  .book{
+    width: 60%;
+    margin: auto;
+    border: 2px solid black;
+    margin-top: 30px;
+    border-radius: 10px;
+
+  }
+  .book_head{
+    font-size: 25px;
+    text-transform:  uppercase;
+    margin: auto;
+    font-weight: bold;
+  }
+  .card-body{
+    padding: 20px;
+    font-size: 22px;
+  }
+  @media screen and (max-width: 800px) {
+    .card-body{
+      font-size: 18px;
+    }
+  }
+</style>
+{% endblock head %}
+
+
 
 {% block body %}
 {% if request.session.cust_id %}
-<div class="container">
-  Booking confirmed
-</div>
+<div class="container" >
+  <div class='card book' style= 'background-color: #ebedf0; padding: 20px;'>
+    <div class='card-title book_head'>Booking confirmed</div>
+    <div class="card-body">
+      <div class="card-text"><b>Name:</b> {{book.cust_name}}</div>
+      <div class="card-text"><b>Phone No.:</b> {{book.cust_phone}}</div>
+      <div class="card-text"><b>Room No.:</b> {{book.room_no}}</div>
+      <div class="card-text"><b>Room Type:</b> {{book.room_type}}</div>
+      <div class="card-text"><b>Check In Date:</b> {{book.checkin}}</div>
+      <div class="card-text"><b>Check Out Date: </b>{{book.checkout}}</div>
+
+      <div class="card-text"><b>Payment Amount:</b> {{book.price}}</div>
+      <div class="card-text"><b>Order ID:</b> {{book.order_id}}</div>
+      <div class="card-text"><b>Booking ID:</b> {{book.id}}</div>
+      <div class="card-text text-center" ><b>(Make a ScreenShot and Keep It)</b></div>
+    </div>
+    <a class="btn btn-info mx-auto py-2 fw-normal"style='text: center;' href='{% url 'home' %}'>GO TO HOMEPAGE</a>
+  </div>
+</div>  
 {% else %}
 <a href="{% url 'login' %}">Login</a> to continue
 {% endif %}
